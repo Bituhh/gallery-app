@@ -1,0 +1,43 @@
+<ion-split-pane contentId="main-content">
+  <ion-menu contentId="main-content" type="reveal">
+    <ion-content>
+      <ion-list>
+        <ion-list-header>Menu</ion-list-header>
+        <ion-note></ion-note>
+
+        @for (page of pages; track page.title) {
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="forward" [routerLink]="[page.url]" lines="none" detail="false"
+                      routerLinkActive="selected">
+              <ion-icon aria-hidden="true"
+                        slot="start"
+                        [ios]="page.icon + '-outline'"
+                        [md]="page.icon + '-sharp'"/>
+              <ion-label>{{ page.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        }
+      </ion-list>
+
+      <ion-list id="labels-list">
+        <ion-list-header>Tags</ion-list-header>
+
+        @for (tag of tags; track $index) {
+          <ion-menu-toggle auto-hide="false">
+            <ion-item lines="none" detail="false">
+              <ion-icon aria-hidden="true" slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
+              <ion-label>{{ tag }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        } @empty {
+          <ion-item lines="none" detail="false">
+            <ion-icon aria-hidden="true" slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
+            <ion-label>No tags found</ion-label>
+          </ion-item>
+        }
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"/>
+</ion-split-pane>
+

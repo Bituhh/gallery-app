@@ -1,11 +1,12 @@
 {
   "name": "gallery-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a simple gallery app that allows users to view images, group them into albums and tag them with keywords.",
   "main": "index.js",
   "keywords": [],
-  "author": "",
+  "author": "Victor Coelho De Oliveira",
   "license": "ISC",
+  "repository": "https://github.com/Bituhh/gallery-app.git",
   "dependencies": {
     "@ionic/cli": "^7.2.0",
     "@nestjs/cli": "^10.3.2",

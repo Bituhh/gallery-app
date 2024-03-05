@@ -5,7 +5,7 @@ services:
     image: postgres:bookworm
     container_name: gallery-app-postgres
     ports:
-      - '5432:${POSTGRES_PORT}'
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     env_file:
       - .env
     volumes:
@@ -15,5 +15,5 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_DB=${POSTGRES_DATABASE}
 volumes:
-    postgres:
-      driver: local
+  postgres:
+    driver: local

@@ -4,7 +4,7 @@ import * as process from 'process';
 import {CONFIGURATION_SERVICE_TOKEN} from '@nestjs/config/dist/config.constants';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule );
+  const app = await NestFactory.create(AppModule);
   app.enableCors({
     origin: '*',
   })

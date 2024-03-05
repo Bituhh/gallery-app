@@ -3,15 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.51">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-4||-9223372036854775808|c|G
-4||10|c|G
-4||10|C|G
-4||10|T|G</Grants>
-      <IntrospectionStateNumber>732</IntrospectionStateNumber>
+      <IntrospectionStateNumber>745</IntrospectionStateNumber>
       <ServerVersion>16.2</ServerVersion>
       <StartupTime>1709415306</StartupTime>
       <TimeZones>true ACDT
@@ -1406,7 +1398,7 @@ false posixrules
 13212||10|C|G
 13212||-9223372036854775808|U|G
 13212||10|U|G</Grants>
-      <IntrospectionStateNumber>732</IntrospectionStateNumber>
+      <IntrospectionStateNumber>745</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
       <OwnerName>app-user</OwnerName>
     </database>
@@ -4840,8 +4832,8 @@ false posixrules
     <schema id="264" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>732</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-03-02.21:35:21</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>745</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-03-03.12:27:16</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>524</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -8202,5 +8194,62 @@ false posixrules
       <StateNumber>524</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
+    <sequence id="509" parent="264" name="image_id_seq">
+      <DasType>integer|0s</DasType>
+      <ObjectId>16388</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>741</StateNumber>
+      <OwnerName>app-user</OwnerName>
+    </sequence>
+    <table id="510" parent="264" name="image">
+      <ObjectId>16389</ObjectId>
+      <StateNumber>741</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>app-user</OwnerName>
+    </table>
+    <column id="511" parent="510" name="id">
+      <DasType>integer|0s</DasType>
+      <DefaultExpression>nextval(&apos;image_id_seq&apos;::regclass)</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>741</StateNumber>
+      <SequenceId>16388</SequenceId>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="512" parent="510" name="name">
+      <DasType>varchar|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>741</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="513" parent="510" name="description">
+      <DasType>varchar|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>743</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="514" parent="510" name="key">
+      <DasType>varchar|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>742</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="515" parent="510" name="PK_d6db1ab4ee9ad9dbe86c64e4cc3">
+      <ColNames>id</ColNames>
+      <ObjectId>16395</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>741</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="516" parent="510" name="PK_d6db1ab4ee9ad9dbe86c64e4cc3">
+      <ObjectId>16396</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>741</StateNumber>
+      <UnderlyingIndexId>16395</UnderlyingIndexId>
+    </key>
   </database-model>
 </dataSource>

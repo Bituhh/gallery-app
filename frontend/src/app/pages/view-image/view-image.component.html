@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/images"/>
+    </ion-buttons>
+    <ion-title>
+      View Image
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="onDeleteImage()">
+        <ion-icon slot="icon-only" md="trash-outline" ios="trash-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <ion-grid [formGroup]="form">
+    <ion-row>
+      <ion-col style="display: flex; justify-content: center;">
+        <ion-img [src]="image()?.url" style="max-width: 1000px; max-height: 700px"/>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input labelPlacement="floating"
+                     label="Name"
+                     formControlName="name"/>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-textarea labelPlacement="floating"
+                        label="Note"
+                        formControlName="description"
+                        [rows]="5"/>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div style="margin: 0 0 5px 0;">
+          @for (tag of form.get('tags')?.value; track tag.id) {
+            <ion-chip>
+              #{{tag.name}}
+              <ion-icon md="close-outline" ios="close-sharp" (click)="onRemoveTag(tag)"/>
+            </ion-chip>
+          }
+        </div>
+        <app-autocomplete label="Tags" [getOptions]="onGetOptions" (selectedOption)="onAddTag($event)"/>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

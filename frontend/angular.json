@@ -35,7 +35,11 @@
               "src/global.scss",
               "src/theme/variables.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "ngxEnv": {
+              "prefix": "(APP_|AWS_)",
+              "root": "../"
+            }
           },
           "configurations": {
             "production": {

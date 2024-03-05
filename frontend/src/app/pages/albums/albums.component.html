@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button/>
+    </ion-buttons>
+    <ion-title>
+      Albums
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="isAddingAlbum = true">
+        <ion-icon slot="icon-only" ios="add-outline" md="add-outline"/>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    @if (isAddingAlbum) {
+      <ion-row>
+        <ion-col size="12">
+          <ion-card [formGroup]="addAlbumForm">
+            <ion-card-header>
+              <ion-card-title>
+                <ion-input placeholder="Album Name" formControlName="name"/>
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-textarea placeholder="Description" formControlName="description"/>
+              <br>
+              <ion-buttons>
+                <ion-button color="danger" (click)="isAddingAlbum = false">Cancel</ion-button>
+                <ion-button color="primary" (click)="isAddingAlbum = false; onAddAlbum()" [disabled]="addAlbumForm.invalid">Add</ion-button>
+              </ion-buttons>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    }
+    <ion-row>
+      @for (album of albums(); track album.id) {
+        <ion-col size="12" size-md="6" size-lg="4">
+          <ion-card button (click)="onViewAlbum(album)">
+            <ion-card-header>
+              <ion-card-title>{{album.name}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{album.description}}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>

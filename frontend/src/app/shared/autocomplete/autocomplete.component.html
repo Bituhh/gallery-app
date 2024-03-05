@@ -1,0 +1,12 @@
+<ion-item>
+  <ion-input [formControl]="formControl" [label]="label" labelPlacement="floating" id="input" (keyup.enter)="onSelectOption({label: formControl.value!})"/>
+</ion-item>
+@if (isOpen) {
+  <ion-list style="position: absolute;">
+    @for (option of options(); track option.id) {
+      <ion-item button (click)="onSelectOption(option)">
+        {{ option.label }}
+      </ion-item>
+    }
+  </ion-list>
+}

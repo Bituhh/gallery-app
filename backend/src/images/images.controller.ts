@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, Put, Query} from '@nestjs/common';
 import { ImagesService } from './images.service';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
@@ -13,8 +13,8 @@ export class ImagesController {
   }
 
   @Get()
-  findAll() {
-    return this.imagesService.findAll();
+  findAll(@Query('orderBy') orderBy?: string, @Query('tag') tagId?: string) {
+    return this.imagesService.findAll({ascending: orderBy === 'asc', tagId: tagId ? +tagId : undefined});
   }
 
   @Get(':id')

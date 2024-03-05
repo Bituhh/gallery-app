@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/albums"/>
+    </ion-buttons>
+    <ion-title>
+      {{ album()?.name }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="onDeleteAlbum()">
+        <ion-icon slot="icon-only" ios="trash-outline" md="trash-sharp"/>
+      </ion-button>
+      <ion-button color="primary" id="select-images-modal">
+        <ion-icon slot="icon-only" ios="add-outline" md="add-sharp"/>
+      </ion-button>
+      <ion-modal trigger="select-images-modal" (ionModalWillPresent)="onModalWillPresent()">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button color="danger" (click)="onCancelSelection()">
+                  Cancel
+                </ion-button>
+              </ion-buttons>
+              <ion-title>
+                Select Images
+              </ion-title>
+              <ion-buttons slot="end">
+                <ion-button color="primary" (click)="onConfirmSelection()">
+                  Confirm
+                </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+            <ion-grid>
+              <ion-row>
+                @for (image of images(); track image.id) {
+                  <ion-col size="6" size-sm="4" size-md="3" size-lg="2"
+                           (click)="image.selected = !image.selected"
+                           [style.opacity]="image.selected ? 0.8 : 1">
+                    <ion-checkbox [checked]="image.selected ?? false"
+                                  style="position: absolute; top: 0; left: 0;"></ion-checkbox>
+                    <ion-img [src]="image.url"
+                             [alt]="image.description ?? image.name"
+                             style="scale: 0.9"/>
+                  </ion-col>
+                }
+              </ion-row>
+            </ion-grid>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col style="display: flex; justify-content: center;">
+        <p>
+          {{ album()?.description }}
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      @for (image of album()?.images; track image.id) {
+        <ion-col size="6" size-sm="4" size-md="3" size-lg="2" [routerLink]="['/images', image.id]" routerDirection="forward">
+          <ion-img [src]="image.url"
+                   [alt]="image.description ?? image.name"/>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>

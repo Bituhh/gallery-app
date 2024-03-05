@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button/>
+    </ion-buttons>
+    <ion-title> {{tag() ? '#' + tag()?.name : 'Images'}}</ion-title>
+    <ion-buttons slot="end">
+      @if (ascendingOrder) {
+        <ion-button (click)="onReorder(false)">
+          <ion-icon slot="icon-only" ios="arrow-down-outline" md="arrow-down-sharp"/>
+        </ion-button>
+      } @else {
+        <ion-button (click)="onReorder(true)">
+          <ion-icon slot="icon-only" ios="arrow-up-outline" md="arrow-up-sharp"/>
+        </ion-button>
+      }
+    </ion-buttons>
+    @if (loading()) {
+      <ion-progress-bar type="indeterminate"/>
+    }
+  </ion-toolbar>
+  @if (isSelectionMode) {
+    <ion-toolbar style="opacity: .5">
+      <ion-buttons slot="end">
+        <ion-button (click)="onSelectAllImages()" [disabled]="loading()">
+          <ion-icon slot="icon-only" ios="checkmark-done-circle-outline" md="checkmark-done-circle-sharp"/>
+        </ion-button>
+        <ion-button (click)="onDeleteSelectedImages()" [disabled]="loading()">
+          <ion-icon slot="icon-only" ios="trash-outline" md="trash-sharp"/>
+        </ion-button>
+
+        <ion-button (click)="onExitSelectionMode()" [disabled]="loading()">
+          <ion-icon slot="icon-only" ios="close-circle-outline" md="close-circle-sharp"/>
+        </ion-button>
+      </ion-buttons>
+
+    </ion-toolbar>
+  }
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      @for (image of images(); track image.id) {
+        <ion-col size="6" size-sm="4" size-md="3" size-lg="2"
+                 long-press (press)="onSelectImage(image.id!)" (tap)="onTapImage(image.id!)"
+                 [style.opacity]="image.selected ? 0.8 : 1">
+          @if (isSelectionMode) {
+            <ion-checkbox [checked]="image.selected ?? false"
+                          style="position: absolute; top: 0; left: 0;"></ion-checkbox>
+          }
+          <ion-img [src]="image.url" [alt]="image.description ?? image.name"
+                   style="transition: scale 0.5s ease;"
+                   [style.scale]="isSelectionMode ? .9 : 1"/>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button color="primary" expand="full" (click)="onUploadImage()" [disabled]="loading()">
+      Upload Images
+    </ion-button>
+    <ion-button color="secondary" expand="full" (click)="onTakePicture()" [disabled]="loading()">
+      Take a Picture
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
